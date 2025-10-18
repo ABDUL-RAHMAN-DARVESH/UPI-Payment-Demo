@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+            margin-top: 80px;
+        }
+        .box {
+            display: inline-block;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        p {
+            font-size: 17px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Order Summary</h2>
+        <p><strong>Product:</strong> {{ product }}</p>
+        <p><strong>Order ID:</strong> {{ order_id }}</p>
+        <p><strong>Amount:</strong> ₹{{ amount }}</p>
+        <br>
+        <button onclick="payViaUPI()">Pay via UPI</button>
+        <p style="color: #888; font-size: 14px;">Note: In some UPI apps (like Google Pay), please enter ₹1 manually.</p>
+        <br>
+        <div id="confirmSection" style="display: none; margin-top: 20px; padding: 15px; background: #f0f8ff; border-radius: 8px;">
+            <p>After completing payment, please confirm:</p>
+            <form method="POST" action="/payment-status">
+                <input type="hidden" name="order_id" value="{{ order_id }}">
+                <button type="submit" name="payment_done" value="yes" style="background: #28a745; margin: 5px;">Payment Completed</button>
+                <button type="submit" name="payment_done" value="no" style="background: #dc3545; margin: 5px;">Payment Failed</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function payViaUPI() {
+            const upiLink = "{{ upi_link }}";
+            window.location.href = upiLink;
+            
+            // Show confirmation section after 3 seconds
+            setTimeout(() => {
+                document.getElementById('confirmSection').style.display = 'block';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
