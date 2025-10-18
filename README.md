@@ -3,6 +3,7 @@
 A simple Flask web application demonstrating UPI payment integration with manual confirmation system.
 
 ## 🚀 Features
+I Have ability to do that automatic confirmation and send conformation via sms but these are requires some cost of api's. So i simply created this but I'll create what you want.
 
 - **Order Summary Display** - Shows product details and ₹1 payment amount
 - **UPI Deep-Link Generation** - Creates direct UPI payment links for GPay, PhonePe, Paytm
